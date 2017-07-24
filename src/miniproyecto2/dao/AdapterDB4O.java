@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package miniproyecto2.adaptersdb4o;
+package miniproyecto2.dao;
 
 import com.db4o.ObjectSet;
 import com.db4o.query.Query;
@@ -15,6 +15,7 @@ import java.util.List;
 import java.lang.Class;
 import java.lang.reflect.ParameterizedType;
 import java.util.Map;
+import models.Transaccion;
 
 /**
  *
@@ -26,24 +27,36 @@ public abstract class AdapterDB4O<T>
     
     private final Class<T> type;
     public AdapterDB4O()
-    {
-        //Esto Consigue la Clase del Tipo Generico !
+    {   
         this.type = (Class<T>) ((ParameterizedType) getClass()
                             .getGenericSuperclass()).getActualTypeArguments()[0];
     }
     
-    public boolean insertRecord(DB4OConnection db4, T record) 
+    public boolean insert(DB4OConnection db4, T record) 
     {
-        // Guardar un Objeto de cualquier tipo en la BD 
-
         db4.open();
         db4.save(record);
+        db4.save(new Transaccion("insert",type.getName(),record.toString()));
         db4.close();
         return true;  
     }
-
-   
-    public boolean deleteRecord(DB4OConnection db4, T record) 
+    
+    public boolean update(DB4OConnection db4, T record, String id)
+    {
+        T obj = queryByProperty(db4,"id",id).get(0);
+        db4.open();
+        Query query = db4.getDb().query();
+        query.constrain(obj);
+        ObjectSet<T> objSet = query.execute();
+        while(objSet.hasNext())
+            db4.delete(objSet.next());
+        db4.save(record);
+        db4.save(new Transaccion("update",type.getName(),record.toString()));
+        db4.close();
+        return true;
+    }
+    
+    public boolean delete(DB4OConnection db4, T record) 
     {   
         db4.open();
         Query query = db4.getDb().query();
@@ -51,6 +64,7 @@ public abstract class AdapterDB4O<T>
         ObjectSet<T> objSet = query.execute();
         while(objSet.hasNext())
             db4.delete(objSet.next());
+        db4.save(new Transaccion("delete",type.getName(),record.toString()));
         db4.close();
         return true;  
     }

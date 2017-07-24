@@ -6,7 +6,9 @@
 package miniproyecto2;
 
 import connections.DB4OConnection;
-import miniproyecto2.adaptersdb4o.UserDAO;
+import miniproyecto2.dao.DepartamentoDAO;
+import miniproyecto2.dao.UserDAO;
+import models.Departamento;
 import models.User;
 
 /**
@@ -21,7 +23,7 @@ public class MiniProyecto2 {
     public static void main(String[] args) {
         // TODO code application logic here
         DB4OConnection db = new DB4OConnection("BD.jessele");
-        UserDAO.getInstance().insertRecord(db, new User());
-    }
+        
+    }       
     
 }

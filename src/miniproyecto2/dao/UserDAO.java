@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package miniproyecto2.adaptersdb4o;
+package miniproyecto2.dao;
 
 import connections.DB4OConnection;
 import models.User;
@@ -28,8 +28,4 @@ public class UserDAO extends AdapterDB4O<User>
         return instance;
     }
     
-    public void insert(DB4OConnection db,User user)
-    {
-        this.insertRecord(db, user);
-    }
 }

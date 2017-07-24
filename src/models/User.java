@@ -5,6 +5,7 @@
  */
 package models;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -12,50 +13,73 @@ import java.util.Objects;
  * @author Mota
  */
 public class User {
-    private String name;
-    private String password;
-    private String phone;
+    private String ci;
+    private String nombre;
+    private Date nacimiento;
+    private String apellido;
+    private int departamento;
 
-    public String getName() {
-        return name;
+    public User(String ci, String nombre, Date nacimiento, String apellido, int departamento) {
+        this.ci = ci;
+        this.nombre = nombre;
+        this.nacimiento = nacimiento;
+        this.apellido = apellido;
+        this.departamento = departamento;
+    }
+    
+    public String getCi() {
+        return ci;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCi(String ci) {
+        this.ci = ci;
     }
 
-    public String getPassword() {
-        return password;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getPhone() {
-        return phone;
+    public Date getNacimiento() {
+        return nacimiento;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setNacimiento(Date nacimiento) {
+        this.nacimiento = nacimiento;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public int getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(int departamento) {
+        this.departamento = departamento;
     }
 
     @Override
     public String toString() {
-        return "User{" + "name=" + name + ", password=" + password + ", phone=" + phone + '}';
+        return "User{" + "ci=" + ci + ", nombre=" + nombre + ", nacimiento=" + nacimiento + ", apellido=" + apellido + ", departamento=" + departamento + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -63,12 +87,12 @@ public class User {
             return false;
         }
         final User other = (User) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        if (!Objects.equals(this.ci, other.ci)) {
             return false;
         }
         return true;
     }
     
     
-    
+
 }
