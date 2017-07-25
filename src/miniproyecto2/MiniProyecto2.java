@@ -6,8 +6,11 @@
 package miniproyecto2;
 
 import connections.DB4OConnection;
+import controlador.Control;
+import miniproyecto2.dao.AdminDAO;
 import miniproyecto2.dao.DepartamentoDAO;
 import miniproyecto2.dao.UserDAO;
+import models.Admin;
 import models.Departamento;
 import models.User;
 
@@ -23,6 +26,7 @@ public class MiniProyecto2 {
     public static void main(String[] args) {
         // TODO code application logic here
         DB4OConnection db = new DB4OConnection("BD.jessele");
+        Control controlador = new Control(1, db);
         
     }       
     

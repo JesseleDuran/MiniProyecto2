@@ -103,7 +103,7 @@ public abstract class AdapterDB4O<T>
             return new ArrayList<>(Arrays.asList(lArray));
     }
     
-    public List<T> queryByAllPropertys(DB4OConnection db4o,HashMap<String, Object> hash)
+    public List<T> queryByAllProperties(DB4OConnection db4o,HashMap<String, Object> hash)
     {
         List<T> result = new ArrayList<>();
         db4o.open();
@@ -121,4 +121,5 @@ public abstract class AdapterDB4O<T>
         db4o.close();
         return result;
     }
+    
 }

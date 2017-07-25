@@ -18,16 +18,16 @@ public class Daño {
     private boolean resuelto;
     private double costo;
     private Date fecha;
+    private String dispositivo;
 
-    public Daño(String descripcion, boolean resuelto, double costo, Date fecha) {
+    public Daño(String descripcion, boolean resuelto, double costo, Date fecha, String dispositivo) {
         this.id = UUID.randomUUID().toString();
         this.descripcion = descripcion;
         this.resuelto = resuelto;
         this.costo = costo;
         this.fecha = fecha;
+        this.dispositivo = dispositivo;
     }
-    
-    
     
     public String getId() {
         return id;
@@ -64,6 +64,15 @@ public class Daño {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    public String getDispositivo() {
+        return dispositivo;
+    }
+
+    public void setDispositivo(String dispositivo) {
+        this.dispositivo = dispositivo;
+    }
+    
 
     @Override
     public String toString() {

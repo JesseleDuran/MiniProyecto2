@@ -17,9 +17,9 @@ public class User {
     private String nombre;
     private Date nacimiento;
     private String apellido;
-    private int departamento;
+    private String departamento;
 
-    public User(String ci, String nombre, Date nacimiento, String apellido, int departamento) {
+    public User(String ci, String nombre, Date nacimiento, String apellido, String departamento) {
         this.ci = ci;
         this.nombre = nombre;
         this.nacimiento = nacimiento;
@@ -59,11 +59,11 @@ public class User {
         this.apellido = apellido;
     }
 
-    public int getDepartamento() {
+    public String getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(int departamento) {
+    public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
 
