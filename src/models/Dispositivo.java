@@ -16,6 +16,7 @@ public class Dispositivo {
     private String nombre;
     private String marca;
     private String descripcion;
+    private String imagen;
     private boolean componente;
 
     public Dispositivo(String nombre, String marca, String descripcion, boolean componente) {
@@ -87,7 +88,5 @@ public class Dispositivo {
         }
         return true;
     }
-    
-    
-    
+  
 }

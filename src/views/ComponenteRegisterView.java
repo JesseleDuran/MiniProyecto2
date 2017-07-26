@@ -12,13 +12,13 @@ import java.awt.event.KeyListener;
  *
  * @author Jessele Durán
  */
-public class AppRegisterView extends javax.swing.JFrame {
+public class ComponenteRegisterView extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminRegisterView
      */
-    public AppRegisterView() {
-        super("Registrar Aplicación");
+    public ComponenteRegisterView() {
+        super("Registrar Componente");
         initComponents();
         restringirTeclas();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -34,92 +34,99 @@ public class AppRegisterView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        marcaAppField = new javax.swing.JTextField();
+        marcaField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        registrarAppButton = new javax.swing.JButton();
+        registrarButton = new javax.swing.JButton();
         cancelarButton = new javax.swing.JButton();
-        nameAppField = new javax.swing.JTextField();
+        nameField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        versionField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        descripcionArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel2.setText("Marca");
 
-        marcaAppField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        marcaField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel1.setText("Nombre");
 
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel5.setText("Versión");
+        jLabel5.setText("Descripción");
 
-        registrarAppButton.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        registrarAppButton.setText("Registrar");
-        registrarAppButton.setActionCommand("RegistrarApp");
+        registrarButton.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        registrarButton.setText("Registrar");
+        registrarButton.setActionCommand("RegistrarCompo");
+
 
         cancelarButton.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         cancelarButton.setText("Cancelar");
+        cancelarButton.setActionCommand("CancelarComp");
 
 
-        nameAppField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        nameField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        jLabel3.setText("Registrar Aplicación");
+        jLabel3.setText("Registrar Componente");
 
-        versionField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-
+        descripcionArea.setColumns(20);
+        descripcionArea.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        descripcionArea.setRows(5);
+        jScrollPane1.setViewportView(descripcionArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(registrarAppButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(marcaAppField, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameAppField, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addComponent(versionField, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
-                .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(56, 56, 56))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(registrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(marcaField)
+                        .addComponent(jScrollPane1)
+                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameAppField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(marcaAppField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(marcaField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(versionField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registrarAppButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                    .addComponent(registrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -128,14 +135,15 @@ public class AppRegisterView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton cancelarButton;
+    public javax.swing.JTextArea descripcionArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    public javax.swing.JTextField marcaAppField;
-    public javax.swing.JTextField nameAppField;
-    public javax.swing.JButton registrarAppButton;
-    public javax.swing.JTextField versionField;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTextField marcaField;
+    public javax.swing.JTextField nameField;
+    public javax.swing.JButton registrarButton;
     // End of variables declaration//GEN-END:variables
     public KeyListener eventosDeTeclaOnlyLetters;
 
@@ -161,8 +169,7 @@ public class AppRegisterView extends javax.swing.JFrame {
             }
         };
 
-        marcaAppField.addKeyListener(eventosDeTeclaOnlyLetters);
-        nameAppField.addKeyListener(eventosDeTeclaOnlyLetters);
+        marcaField.addKeyListener(eventosDeTeclaOnlyLetters);
     }
 
 }
