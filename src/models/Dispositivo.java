@@ -17,14 +17,16 @@ public class Dispositivo {
     private String marca;
     private String descripcion;
     private String imagen;
+    private int cantidad;
     private boolean componente;
 
-    public Dispositivo(String nombre, String marca, String descripcion, boolean componente) {
+    public Dispositivo(String nombre, String marca, String descripcion, boolean componente, int cantidad) {
         this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.marca = marca;
         this.descripcion = descripcion;
         this.componente = componente;
+        this.cantidad = cantidad;
     }
     
     public String getId() {

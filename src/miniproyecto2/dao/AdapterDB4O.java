@@ -87,6 +87,7 @@ public abstract class AdapterDB4O<T>
         query.constrain(type);
         ObjectSet<T> objSet = query.execute();
         T[] lArray = (T[])objSet.toArray();
+       
         return new ArrayList<>(Arrays.asList(lArray));
     }
     

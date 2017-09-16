@@ -107,10 +107,10 @@ public class MenuView extends javax.swing.JFrame {
         verMenu.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         menuBar.add(verMenu);
 
-        reportesMenu.setText("Reportes");
+        reportesMenu.setText("Asignar");
         reportesMenu.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
-        horariosReporte.setText("Horarios Actuales");
+        horariosReporte.setText("Dispositivos a Usuarios");
         horariosReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 horariosReporteActionPerformed(evt);
@@ -118,7 +118,7 @@ public class MenuView extends javax.swing.JFrame {
         });
         reportesMenu.add(horariosReporte);
 
-        aulasReporte.setText("Estatus de las Aulas");
+        aulasReporte.setText("Componetes a dispositivos");
         aulasReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aulasReporteActionPerformed(evt);
@@ -174,18 +174,18 @@ public class MenuView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(registrarInscripcionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(210, 210, 210))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(238, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(26, 26, 26)
+                .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(264, 264, 264)
+                .addComponent(registrarInscripcionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +200,7 @@ public class MenuView extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(registrarInscripcionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -295,21 +295,21 @@ public class MenuView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JMenuItem aulasReporte;
-    public javax.swing.JMenuItem cantidadInscriosReporte;
-    public javax.swing.JMenu cerrrarSesionMenu;
-    public javax.swing.JMenuItem cursosReporte;
-    public javax.swing.JMenuItem horariosReporte;
-    public javax.swing.JMenuItem instructoresReporte;
-    public javax.swing.JLabel jLabel3;
-    public javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTable1;
-    public javax.swing.JMenuBar menuBar;
-    public javax.swing.JLabel nombreLabel;
-    public javax.swing.JButton registrarInscripcionButton;
+    private javax.swing.JMenuItem aulasReporte;
+    private javax.swing.JMenuItem cantidadInscriosReporte;
+    private javax.swing.JMenu cerrrarSesionMenu;
+    private javax.swing.JMenuItem cursosReporte;
+    private javax.swing.JMenuItem horariosReporte;
+    private javax.swing.JMenuItem instructoresReporte;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JLabel nombreLabel;
+    private javax.swing.JButton registrarInscripcionButton;
     public javax.swing.JMenu registrarMenu;
-    public javax.swing.JMenu reportesMenu;
-    public javax.swing.JMenu verMenu;
+    private javax.swing.JMenu reportesMenu;
+    private javax.swing.JMenu verMenu;
     // End of variables declaration//GEN-END:variables
     public Object ci;
     private void initButtons()

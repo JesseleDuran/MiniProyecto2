@@ -15,14 +15,12 @@ import java.util.Objects;
 public class User {
     private String ci;
     private String nombre;
-    private Date nacimiento;
     private String apellido;
     private String departamento;
 
-    public User(String ci, String nombre, Date nacimiento, String apellido, String departamento) {
+    public User(String ci, String nombre, String apellido, String departamento) {
         this.ci = ci;
         this.nombre = nombre;
-        this.nacimiento = nacimiento;
         this.apellido = apellido;
         this.departamento = departamento;
     }
@@ -43,14 +41,6 @@ public class User {
         this.nombre = nombre;
     }
 
-    public Date getNacimiento() {
-        return nacimiento;
-    }
-
-    public void setNacimiento(Date nacimiento) {
-        this.nacimiento = nacimiento;
-    }
-
     public String getApellido() {
         return apellido;
     }
@@ -69,7 +59,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "ci=" + ci + ", nombre=" + nombre + ", nacimiento=" + nacimiento + ", apellido=" + apellido + ", departamento=" + departamento + '}';
+        return "User{" + "ci=" + ci + ", nombre=" + nombre + ", apellido=" + apellido + ", departamento=" + departamento + '}';
     }
 
     @Override

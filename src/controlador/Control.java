@@ -12,22 +12,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import miniproyecto2.dao.AdminDAO;
 import miniproyecto2.dao.AplicacionDAO;
 import miniproyecto2.dao.DepartamentoDAO;
 import miniproyecto2.dao.DispositivoDAO;
+import miniproyecto2.dao.UserDAO;
 import models.Admin;
 import models.Aplicacion;
 import models.Departamento;
 import models.Dispositivo;
+import models.User;
 import views.AppRegisterView;
 import views.ComponenteRegisterView;
 import views.DispositivoRegisterView;
 import views.DptoRegisterView;
 import views.LoginView;
 import views.MenuView;
+import views.UserRegisterView;
 
 /**
  *
@@ -35,19 +39,22 @@ import views.MenuView;
  */
 public class Control implements ActionListener {
     
+    DB4OConnection db;
     LoginView ventana_login  = new LoginView();
     MenuView ventana_principal;
     DptoRegisterView dpto_register = new DptoRegisterView();
     AppRegisterView app_register = new AppRegisterView();
     DispositivoRegisterView dispo_register = new DispositivoRegisterView();
     ComponenteRegisterView comp_register = new ComponenteRegisterView();
+    UserRegisterView user_register;
     Admin adm;
-    DB4OConnection db;
     AplicacionDAO appDao = AplicacionDAO.getInstance();
+    UserDAO userDao = UserDAO.getInstance();
     DispositivoDAO dispoDao = DispositivoDAO.getInstance();
     DepartamentoDAO dptoDao = DepartamentoDAO.getInstance();
     
     public Control(Integer Ventana, DB4OConnection db ){
+        user_register = new UserRegisterView(db);
         this.db = db;
         switch(Ventana){
             case 1: 
@@ -74,7 +81,12 @@ public class Control implements ActionListener {
                 this.dispo_register.setVisible(true);
                 this.dispo_register.cancelarButton.addActionListener(this);
                 this.dispo_register.registrarButton.addActionListener(this);             
-                break;    
+                break;
+            case 6:
+                this.user_register.setVisible(true);
+                this.user_register.cancelarButton.addActionListener(this);
+                this.user_register.registrarButton.addActionListener(this);    
+                break;
         }
     }
     
@@ -105,25 +117,54 @@ public class Control implements ActionListener {
             case "CancelarDpto":
                 this.dpto_register.dispose();
                 break;
-            case "RegistraDispo":  
+            case "RegistrarDispo":  
                 registrarDispoButtonActionPerformed(e);
                 break;
             case "CancelarDispo":
                 this.dispo_register.dispose();
                 break;
+            case "RegistrarUser":    
+                registrarUserButtonActionPerformed(e);
+                break;
+                
            
         }
     }
     //registers
     
+    private void registrarUserButtonActionPerformed(ActionEvent evt) {
+        if (validacionesUser() != true) {
+
+            HashMap<String, Object> userComparison = new HashMap<String, Object>();
+            userComparison.put("cedula", this.user_register.ciField.getText());
+            
+            User empleado = new User(this.user_register.ciField.getText(), this.user_register.nameField.getText().toUpperCase(), this.user_register.apellidoField.getText().toUpperCase(), this.user_register.dptosComboBox.getName());
+
+            List<User> userExistente = userDao.queryByAllProperties(db, userComparison);
+
+            if (userExistente.isEmpty()) {
+                if (userDao.insert(db, empleado) == true) {
+                    this.user_register.dispose();
+                    JOptionPane.showMessageDialog(null, "El empleado se ha registrado correctamente", "Registro con éxito", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al registrar empleado", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error:Ese empleado ya existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return;
+
+            }
+        }
+    }
+    
     private void registrarDispoButtonActionPerformed(ActionEvent evt) {
-        if (validacionesCompo() != true) {
+        if (validacionesDispo() != true) {
 
             HashMap<String, Object> dispoComparison = new HashMap<String, Object>();
             dispoComparison.put("nombre", this.dispo_register.nameField.getText().toUpperCase());
             dispoComparison.put("marca", this.dispo_register.marcaField.getText().toUpperCase());
 
-            Dispositivo dispositivo = new Dispositivo(this.dispo_register.nameField.getText().toUpperCase(), this.dispo_register.marcaField.getText().toUpperCase(), this.dispo_register.descripcionArea.getText().toUpperCase(), false);
+            Dispositivo dispositivo = new Dispositivo(this.dispo_register.nameField.getText().toUpperCase(), this.dispo_register.marcaField.getText().toUpperCase(), this.dispo_register.descripcionArea.getText().toUpperCase(), false, Integer.parseInt(this.dispo_register.cantidadField.getText()));
 
             List<Dispositivo> dispoExistente = dispoDao.queryByAllProperties(db, dispoComparison);
 
@@ -149,7 +190,7 @@ public class Control implements ActionListener {
             compComparison.put("nombre", this.comp_register.nameField.getText().toUpperCase());
             compComparison.put("marca", this.comp_register.marcaField.getText().toUpperCase());
 
-            Dispositivo componente = new Dispositivo(this.comp_register.nameField.getText().toUpperCase(), this.comp_register.marcaField.getText().toUpperCase(), this.comp_register.descripcionArea.getText().toUpperCase(), true);
+            Dispositivo componente = new Dispositivo(this.comp_register.nameField.getText().toUpperCase(), this.comp_register.marcaField.getText().toUpperCase(), this.comp_register.descripcionArea.getText().toUpperCase(), true, Integer.parseInt(this.comp_register.cantidadField.getText()));
 
             List<Dispositivo> compExistente = dispoDao.queryByAllProperties(db, compComparison);
 
@@ -304,6 +345,14 @@ public class Control implements ActionListener {
         });
         this.ventana_principal.registrarMenu.add(dispo);
 
+        JMenuItem empleado = new JMenuItem("Empleado");
+        empleado.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Control control1 = new Control(6, db);
+            }
+        });
+        this.ventana_principal.registrarMenu.add(empleado);
+
     }
     
     //validaciones
@@ -345,7 +394,45 @@ public class Control implements ActionListener {
 
         return false;
     }
+  
+    public boolean validacionesDispo() {
+        if (this.dispo_register.nameField.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "Error: Debe ingresar un nombre", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+
+        if (this.dispo_register.marcaField.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "Error: Debe ingresar una marca", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+
+        if (this.dispo_register.descripcionArea.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "Error: Debe ingresar una descripción", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+
+        return false;
+    }
     
+    public boolean validacionesUser() {
+        if (this.user_register.nameField.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "Error: Debe ingresar un nombre", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+
+        if (this.user_register.apellidoField.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "Error: Debe ingresar un apellido", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        
+        if (this.user_register.ciField.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "Error: Debe ingresar una cédula", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+
+        return false;
+    }
+
     public boolean validacionesDpto() {
         if (this.dpto_register.nameDptoField.getText().isEmpty() == true) {
             JOptionPane.showMessageDialog(null, "Error: Debe ingresar un nombre", "ERROR", JOptionPane.ERROR_MESSAGE);

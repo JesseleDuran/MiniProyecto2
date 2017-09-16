@@ -214,7 +214,7 @@ public class AdministradorRegisterView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField nameField;
     // End of variables declaration//GEN-END:variables
-    private MySQLdbConnection db;
+
     private KeyListener eventosDeTecla;
     private KeyListener eventosDeTeclaOnlyLetters;
 

@@ -43,6 +43,8 @@ public class DispositivoRegisterView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descripcionArea = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        cantidadField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +81,12 @@ public class DispositivoRegisterView extends javax.swing.JFrame {
         descripcionArea.setRows(5);
         jScrollPane1.setViewportView(descripcionArea);
 
+        jLabel4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jLabel4.setText("Cantidad");
+
+        cantidadField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,7 +108,9 @@ public class DispositivoRegisterView extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(marcaField)
                                 .addComponent(jScrollPane1)
-                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cantidadField, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(jLabel3)))
@@ -119,6 +129,10 @@ public class DispositivoRegisterView extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(marcaField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cantidadField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -133,13 +147,19 @@ public class DispositivoRegisterView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cantidadFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cantidadFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton cancelarButton;
+    public javax.swing.JTextField cantidadField;
     public javax.swing.JTextArea descripcionArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextField marcaField;
@@ -147,6 +167,7 @@ public class DispositivoRegisterView extends javax.swing.JFrame {
     public javax.swing.JButton registrarButton;
     // End of variables declaration//GEN-END:variables
     public KeyListener eventosDeTeclaOnlyLetters;
+    public KeyListener eventosDeTecla;
 
     private void restringirTeclas() {
 
@@ -169,7 +190,26 @@ public class DispositivoRegisterView extends javax.swing.JFrame {
 
             }
         };
+        eventosDeTecla = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent ke) {
+                char caracter = ke.getKeyChar();
+                if (((caracter < '0') || (caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)) {
+                    ke.consume();
+                }
+            }
 
+            @Override
+            public void keyPressed(KeyEvent ke) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent ke) {
+
+            }
+        };
+        cantidadField.addKeyListener(eventosDeTecla);
         marcaField.addKeyListener(eventosDeTeclaOnlyLetters);
     }
 

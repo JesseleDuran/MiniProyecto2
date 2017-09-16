@@ -15,6 +15,9 @@
               <Font name="Roboto" size="14" style="0"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Menu>
         <Menu class="javax.swing.JMenu" name="verMenu">
           <Properties>
@@ -26,7 +29,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="reportesMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Reportes"/>
+            <Property name="text" type="java.lang.String" value="Asignar"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="14" style="0"/>
             </Property>
@@ -34,7 +37,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="horariosReporte">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Horarios Actuales"/>
+                <Property name="text" type="java.lang.String" value="Dispositivos a Usuarios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="horariosReporteActionPerformed"/>
@@ -42,7 +45,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="aulasReporte">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Estatus de las Aulas"/>
+                <Property name="text" type="java.lang.String" value="Componetes a dispositivos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aulasReporteActionPerformed"/>
@@ -114,22 +117,20 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="616" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="678" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="238" max="32767" attributes="0"/>
+              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Component id="nombreLabel" min="-2" pref="194" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="264" max="-2" attributes="0"/>
+              <Component id="registrarInscripcionButton" min="-2" pref="164" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="registrarInscripcionButton" min="-2" pref="164" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="nombreLabel" min="-2" pref="194" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -149,7 +150,7 @@
               <Component id="jScrollPane1" min="-2" pref="298" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="registrarInscripcionButton" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

@@ -5,6 +5,7 @@
  */
 package miniproyecto2;
 
+import com.db4o.query.Query;
 import connections.DB4OConnection;
 import controlador.Control;
 import miniproyecto2.dao.AdminDAO;
@@ -26,6 +27,7 @@ public class MiniProyecto2 {
     public static void main(String[] args) {
         // TODO code application logic here
         DB4OConnection db = new DB4OConnection("BD.jessele");
+
         Control controlador = new Control(1, db);
         
     }       
