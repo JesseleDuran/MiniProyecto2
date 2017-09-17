@@ -6,6 +6,8 @@
 package models;
 
 import java.util.Objects;
+import utils.Encrypter;
+
 
 /**
  *
@@ -17,7 +19,7 @@ public class Admin
     protected int cedula;
 
     public Admin(int cedula, String clave) {
-        this.clave = clave;
+        this.clave = Encrypter.encrypt(clave);
         this.cedula = cedula;
     }
 

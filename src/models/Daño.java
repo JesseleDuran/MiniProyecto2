@@ -99,6 +99,10 @@ public class Daño {
         }
         return true;
     }
+
+    public void setId(String id) {
+      this.id = id;  
+    }
     
     
 }

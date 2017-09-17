@@ -7,6 +7,7 @@ package views;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import models.Aplicacion;
 
 /**
  *
@@ -163,6 +164,12 @@ public class AppRegisterView extends javax.swing.JFrame {
 
         marcaAppField.addKeyListener(eventosDeTeclaOnlyLetters);
         nameAppField.addKeyListener(eventosDeTeclaOnlyLetters);
+    }
+
+    public void setApp(Aplicacion aplicacion) {
+        nameAppField.setText(aplicacion.getNombre());
+        marcaAppField.setText(aplicacion.getMarca());
+        versionField.setText(aplicacion.getVersion());
     }
 
 }

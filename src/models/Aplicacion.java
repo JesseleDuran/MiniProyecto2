@@ -79,6 +79,10 @@ public class Aplicacion {
         }
         return true;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
    
     
 }

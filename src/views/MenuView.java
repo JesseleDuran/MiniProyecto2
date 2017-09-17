@@ -5,6 +5,13 @@
  */
 package views;
 
+import ca.odell.glazedlists.BasicEventList;
+import ca.odell.glazedlists.EventList;
+import ca.odell.glazedlists.GlazedLists;
+import ca.odell.glazedlists.gui.TableFormat;
+import ca.odell.glazedlists.swing.EventTableModel;
+import connections.DB4OConnection;
+import controlador.ReportesController;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +25,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.table.DefaultTableModel;
+import miniproyecto2.dao.AdapterDB4O;
+import miniproyecto2.dao.DañoDAO;
+import miniproyecto2.dao.DispositivoDAO;
+import models.Daño;
+import models.Dispositivo;
+import utils.PDFGenerator;
 
 /**
  *
@@ -46,25 +59,22 @@ public class MenuView extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        dispositivosTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        registrarInscripcionButton = new javax.swing.JButton();
-        nombreLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        dañosTable = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        actualizar = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         registrarMenu = new javax.swing.JMenu();
         verMenu = new javax.swing.JMenu();
-        reportesMenu = new javax.swing.JMenu();
-        horariosReporte = new javax.swing.JMenuItem();
-        aulasReporte = new javax.swing.JMenuItem();
-        cursosReporte = new javax.swing.JMenuItem();
-        cantidadInscriosReporte = new javax.swing.JMenuItem();
-        instructoresReporte = new javax.swing.JMenuItem();
+        asignarMenu = new javax.swing.JMenu();
         cerrrarSesionMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        dispositivosTable.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        dispositivosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -75,26 +85,33 @@ public class MenuView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        dispositivosTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                dispositivosTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(dispositivosTable);
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        jLabel3.setText("Últimas Transacciones");
+        jLabel3.setText("Dispositivos");
 
-        registrarInscripcionButton.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        registrarInscripcionButton.setText("Realizar Inscripción");
-        registrarInscripcionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarInscripcionButtonActionPerformed(evt);
+        dañosTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
+        ));
+        jScrollPane2.setViewportView(dañosTable);
 
-        nombreLabel.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        nombreLabel.setText("Bienvenida, Nombre Apellido");
+        jLabel4.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel4.setText("Daños");
+
+        actualizar.setText("Actualizar Tablas");
 
         menuBar.setAlignmentX(0.9F);
 
@@ -107,50 +124,9 @@ public class MenuView extends javax.swing.JFrame {
         verMenu.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         menuBar.add(verMenu);
 
-        reportesMenu.setText("Asignar");
-        reportesMenu.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-
-        horariosReporte.setText("Dispositivos a Usuarios");
-        horariosReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horariosReporteActionPerformed(evt);
-            }
-        });
-        reportesMenu.add(horariosReporte);
-
-        aulasReporte.setText("Componetes a dispositivos");
-        aulasReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aulasReporteActionPerformed(evt);
-            }
-        });
-        reportesMenu.add(aulasReporte);
-
-        cursosReporte.setText("Cursos Activos");
-        cursosReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cursosReporteActionPerformed(evt);
-            }
-        });
-        reportesMenu.add(cursosReporte);
-
-        cantidadInscriosReporte.setText("Cantidad de Inscritos por Curso");
-        cantidadInscriosReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cantidadInscriosReporteActionPerformed(evt);
-            }
-        });
-        reportesMenu.add(cantidadInscriosReporte);
-
-        instructoresReporte.setText("Instructores con su carga de Cursos");
-        instructoresReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                instructoresReporteActionPerformed(evt);
-            }
-        });
-        reportesMenu.add(instructoresReporte);
-
-        menuBar.add(reportesMenu);
+        asignarMenu.setText("Asignar");
+        asignarMenu.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        menuBar.add(asignarMenu);
 
         cerrrarSesionMenu.setText("Cerrar Sesión");
         cerrrarSesionMenu.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -172,83 +148,47 @@ public class MenuView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(238, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(26, 26, 26)
-                .addComponent(nombreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
             .addGroup(layout.createSequentialGroup()
-                .addGap(264, 264, 264)
-                .addComponent(registrarInscripcionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(nombreLabel)
-                        .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(registrarInscripcionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(actualizar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void horariosReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horariosReporteActionPerformed
-        // TODO add your handling code here:
-        Controller<Horario> ctrl = new Controller<Horario>(Horario.class);
+    private void dispositivosTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dispositivosTableMouseClicked
 
-        String result;
-        try {
-            result = PDFGenerator.createPDFFromHashMapList(this, ctrl.getAll(db), "Horarios Actuales");
-            Desktop.getDesktop().open(new File(result));
-        } catch (Exception ex) {
-            //TODO Añadir error !
-        }
-
-    }//GEN-LAST:event_horariosReporteActionPerformed
-
-    private void aulasReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aulasReporteActionPerformed
-        // TODO add your handling code here:
-        Controller<Aula> aulas = new Controller<Aula>(Aula.class);
-
-        String result;
-        try {
-            result = PDFGenerator.createPDFFromHashMapList(this, aulas.getAll(db), "Estatus de Aulas");
-            Desktop.getDesktop().open(new File(result));
-        } catch (Exception ex) {
-            //TODO Añadir error !
-        }
-    }//GEN-LAST:event_aulasReporteActionPerformed
-
-    private void cursosReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursosReporteActionPerformed
-        // TODO add your handling code here:
-        ReportesController reporte = new ReportesController();
-
-        String result;
-        try {
-            result = PDFGenerator.createPDFFromHashMapList(this, reporte.mostrarCursosActivos(db), "Cursos Activos");
-            Desktop.getDesktop().open(new File(result));
-        } catch (Exception ex) {
-            //TODO Añadir error !
-        }
-    }//GEN-LAST:event_cursosReporteActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_dispositivosTableMouseClicked
 
     private void cerrrarSesionMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrrarSesionMenuActionPerformed
         System.exit(0);
@@ -258,160 +198,58 @@ public class MenuView extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_cerrrarSesionMenuMouseClicked
 
-    private void registrarInscripcionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarInscripcionButtonActionPerformed
-        try {
-            InscripcionRegisterView inscripcionRegisterView = new InscripcionRegisterView(db, adm);
-            inscripcionRegisterView.setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_registrarInscripcionButtonActionPerformed
-
-    private void cantidadInscriosReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadInscriosReporteActionPerformed
-        // TODO add your handling code here:
-        ReportesController reporte = new ReportesController();
-
-        String result;
-        try {
-            result = PDFGenerator.createPDFFromHashMapList(this, reporte.inscritosPorCurso(db), "Cantidad de Inscritos por Curso");
-            Desktop.getDesktop().open(new File(result));
-        } catch (Exception ex) {
-            //TODO Añadir error !
-        }
-    }//GEN-LAST:event_cantidadInscriosReporteActionPerformed
-
-    private void instructoresReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructoresReporteActionPerformed
-        // TODO add your handling code here:
-        ReportesController reporte = new ReportesController();
-
-        String result;
-        try {
-            result = PDFGenerator.createPDFFromHashMapList(this, reporte.instructoresPorCurso(db), "Profesores con su curso");
-            Desktop.getDesktop().open(new File(result));
-        } catch (Exception ex) {
-            //TODO Añadir error !
-        }
-    }//GEN-LAST:event_instructoresReporteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aulasReporte;
-    private javax.swing.JMenuItem cantidadInscriosReporte;
+    public javax.swing.JButton actualizar;
+    public javax.swing.JMenu asignarMenu;
     private javax.swing.JMenu cerrrarSesionMenu;
-    private javax.swing.JMenuItem cursosReporte;
-    private javax.swing.JMenuItem horariosReporte;
-    private javax.swing.JMenuItem instructoresReporte;
+    private javax.swing.JTable dañosTable;
+    private javax.swing.JTable dispositivosTable;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JLabel nombreLabel;
-    private javax.swing.JButton registrarInscripcionButton;
     public javax.swing.JMenu registrarMenu;
-    private javax.swing.JMenu reportesMenu;
-    private javax.swing.JMenu verMenu;
+    public javax.swing.JMenu verMenu;
     // End of variables declaration//GEN-END:variables
     public Object ci;
     private void initButtons()
     {
         addEdit();
-        nombreLabel.setText("Bienvenida, Administrador de cédula: " + ci);
+       
     }
 
 
     private void addEdit()
     {
-        /*JMenuItem participante = new JMenuItem("Participante");
-        participante.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-                try {
-                    ClienteIndexView clienteEditView = new ClienteIndexView(db);
-                    clienteEditView.setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        });
-        verMenu.add(participante);
-
-        JMenuItem curso = new JMenuItem("Curso");
-        curso.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-                try {
-                    CursoIndexView indexView = new CursoIndexView(db);
-                    indexView.setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        verMenu.add(curso);
-
-        JMenuItem instructor = new JMenuItem("Instructor");
-        instructor.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-                InstructorIndexView instructorEditView = null;
-                try {
-                    instructorEditView = new InstructorIndexView(db);
-                } catch (Exception ex) {
-                    Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                instructorEditView.setVisible(true);
-            }
-        });
-        verMenu.add(instructor);
 
 
 
-        JMenuItem admin = new JMenuItem("Administrador");
-        admin.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-               AdminIndexView adminEditView;
-                try {
-                    adminEditView = new AdminIndexView(db);
-                    adminEditView.setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
-                }
+    }
 
-            }
-        });
-        verMenu.add(admin);
+    public void actualizarDispositivos(DB4OConnection db) {
+     String [] properties = new String[] {"id", "nombre", "marca","descripcion","cantidad"};
+     String [] columns = new String[] {"ID","Nombre","Marca","Descripcion","Cantidad"};
+     EventList list = new BasicEventList();
+     db.open();
+     list.addAll(DispositivoDAO.getInstance().getAll(db));
+     db.close(); 
+     TableFormat personTableFormat = GlazedLists.tableFormat(Dispositivo.class,properties, columns);
+     EventTableModel tableModel = new EventTableModel(list, personTableFormat);
+     dispositivosTable.setModel(tableModel);
+    }
 
-        JMenuItem horario = new JMenuItem("Horario");
-        horario.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-                try {
-                    HorarioIndexView horarioEditView = new HorarioIndexView(db);
-                    horarioEditView.setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        verMenu.add(horario);
-
-        JMenuItem aula = new JMenuItem("Aula");
-        aula.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-                try {
-                    AulaIndexView indexView = new AulaIndexView(db);
-                    indexView.setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        verMenu.add(aula); */
-
-
+    public void actualizarDaños(DB4OConnection db) {
+     String [] properties = new String[] {"descripcion","costo","fecha","resuelto","dispositivo"}; //TODO
+     String [] columns = new String[] {"Descripcion","Costo","Fecha","Resuelto","ID Disp"};
+     EventList list = new BasicEventList();
+     db.open();
+     list.addAll(DañoDAO.getInstance().getAll(db));
+     db.close(); 
+     TableFormat personTableFormat = GlazedLists.tableFormat(Daño.class,properties, columns);
+     EventTableModel tableModel = new EventTableModel(list, personTableFormat);
+     dañosTable.setModel(tableModel);  
     }
 
 }

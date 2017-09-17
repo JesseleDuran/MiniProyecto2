@@ -42,9 +42,9 @@ public abstract class AdapterDB4O<T>
     }
     
     public boolean update(DB4OConnection db4, T record, String id)
-    {
-        T obj = queryByProperty(db4,"id",id).get(0);
+    {   
         db4.open();
+        T obj = queryByProperty(db4,"id",id).get(0);
         Query query = db4.getDb().query();
         query.constrain(obj);
         ObjectSet<T> objSet = query.execute();
@@ -58,15 +58,7 @@ public abstract class AdapterDB4O<T>
     
     public boolean delete(DB4OConnection db4, T record) 
     {   
-        db4.open();
-        Query query = db4.getDb().query();
-        query.constrain(record);
-        ObjectSet<T> objSet = query.execute();
-        while(objSet.hasNext())
-            db4.delete(objSet.next());
-        db4.save(new Transaccion("delete",type.getName(),record.toString()));
-        db4.close();
-        return true;  
+        return deleteByClass(db4,type,record);
     }
 
     protected List<T> intersection(List<T> list1, List<T> list2) 
@@ -123,4 +115,27 @@ public abstract class AdapterDB4O<T>
         return result;
     }
     
+    public static List queryByClass(DB4OConnection db4o, Class c)
+    {
+        Query query = db4o.getDb().query();
+        query.constrain(c);
+        ObjectSet objSet = query.execute();
+        Object[] lArray = objSet.toArray();
+       
+        return new ArrayList<>(Arrays.asList(lArray));
+    }
+    
+    
+    public static boolean deleteByClass(DB4OConnection db4, Class c, Object o)
+    {
+        db4.open();
+        Query query = db4.getDb().query();
+        query.constrain(o);
+        ObjectSet objSet = query.execute();
+        while(objSet.hasNext())
+            db4.delete(objSet.next());
+        db4.save(new Transaccion("delete",c.getName(),o.toString()));
+        db4.close();
+        return true; 
+    }
 }

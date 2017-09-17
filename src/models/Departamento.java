@@ -56,5 +56,9 @@ public class Departamento {
         }
         return true;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     
 }

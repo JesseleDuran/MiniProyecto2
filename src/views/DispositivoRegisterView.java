@@ -7,6 +7,7 @@ package views;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import models.Dispositivo;
 
 /**
  *
@@ -211,6 +212,21 @@ public class DispositivoRegisterView extends javax.swing.JFrame {
         };
         cantidadField.addKeyListener(eventosDeTecla);
         marcaField.addKeyListener(eventosDeTeclaOnlyLetters);
+    }
+
+    public void setDispositivo(Dispositivo a) {
+        cantidadField.setText(a.getCantidad()+"");
+        marcaField.setText(a.getMarca());
+        nameField.setText(a.getNombre());
+        descripcionArea.setText(a.getDescripcion());
+    }
+    
+    public void cleanFields()
+    {
+        cantidadField.setText("");
+        marcaField.setText("");
+        nameField.setText("");
+        descripcionArea.setText("");
     }
 
 }

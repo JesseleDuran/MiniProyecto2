@@ -23,6 +23,7 @@ public class User {
         this.nombre = nombre;
         this.apellido = apellido;
         this.departamento = departamento;
+        System.out.println("New User:"+toString());
     }
     
     public String getCi() {

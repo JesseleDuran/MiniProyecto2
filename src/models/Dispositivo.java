@@ -61,6 +61,11 @@ public class Dispositivo {
         return componente;
     }
 
+    public int getCantidad()
+    {
+        return cantidad;
+    }
+    
     public void setComponente(boolean componente) {
         this.componente = componente;
     }
@@ -89,6 +94,10 @@ public class Dispositivo {
             return false;
         }
         return true;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
   
 }

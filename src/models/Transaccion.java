@@ -25,6 +25,7 @@ public class Transaccion {
         this.tipo = tipo;
         this.clase = clase;
         this.creado = new Date();
+        this.objeto = objeto;
     }
 
     public String getId() {
@@ -46,7 +47,12 @@ public class Transaccion {
     public String getClase() {
         return clase;
     }
-
+    
+    public String getObjeto()
+    {
+        return objeto;
+    }
+    
     public void setClase(String clase) {
         this.clase = clase;
     }

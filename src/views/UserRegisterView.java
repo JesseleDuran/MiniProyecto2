@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.util.List;
 import miniproyecto2.dao.DepartamentoDAO;
 import models.Departamento;
+import models.User;
 
 /**
  *
@@ -18,12 +19,12 @@ import models.Departamento;
  */
 public class UserRegisterView extends javax.swing.JFrame {
 
+    private List<Departamento> departamentos;
     /**
      * Creates new form AdminRegisterView
      */
-    public UserRegisterView(DB4OConnection db) {
+    public UserRegisterView() {
         super("Registrar Empleado");
-        this.db = db;
         initComponents();
         restringirTeclas();
         //inicializarComboBox();
@@ -179,14 +180,17 @@ public class UserRegisterView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     public KeyListener eventosDeTeclaOnlyLetters;
     public KeyListener eventosDeTecla;
-    DB4OConnection db;
 
-    private void inicializarComboBox()
-    {
-
+    public void cargarDepartamentos(DB4OConnection db)
+    {   
+        dptosComboBox.removeAllItems();
+        db.open();
         DepartamentoDAO dptoDao = DepartamentoDAO.getInstance();
-        List<Departamento> departamentos = dptoDao.getAll(db);
-        System.out.println(departamentos);
+        departamentos = dptoDao.getAll(db);
+        db.close();
+        for (Departamento d: departamentos) {
+            dptosComboBox.addItem(d.getNombre());
+        }
     }
 
     private void restringirTeclas() {
@@ -234,5 +238,36 @@ public class UserRegisterView extends javax.swing.JFrame {
         nameField.addKeyListener(eventosDeTeclaOnlyLetters);
         apellidoField.addKeyListener(eventosDeTeclaOnlyLetters);
     }
+    
+    
+    public String getSelectedDepartment()
+    {
+        return departamentos.get(dptosComboBox.getSelectedIndex()).getId();
+    }
 
+    public void setUser(User a) {
+        this.ciField.setText(a.getCi());
+        this.ciField.setEnabled(false);
+        this.apellidoField.setText(a.getApellido());
+        this.nameField.setText(a.getNombre());
+        setDepartment(a.getDepartamento());
+    }
+    
+    public void cleanFields()
+    {
+        this.ciField.setText("");
+        this.ciField.setEnabled(true);
+        this.apellidoField.setText("");
+        this.nameField.setText("");
+       
+    }
+
+    private void setDepartment(String departamento) {
+        for (int i = 0; i < departamentos.size(); i++) {
+            if (departamentos.get(i).getId().equals(departamento)) {
+                this.dptosComboBox.setSelectedIndex(i);
+            }
+        }
+  
+    }
 }

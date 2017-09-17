@@ -7,6 +7,7 @@ package views;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import models.Departamento;
 
 /**
  *
@@ -130,6 +131,10 @@ public class DptoRegisterView extends javax.swing.JFrame {
         };
 
         nameDptoField.addKeyListener(eventosDeTeclaOnlyLetters);
+    }
+
+    public void setDepartment(Departamento a) {
+        this.nameDptoField.setText(a.getNombre());
     }
 
 }

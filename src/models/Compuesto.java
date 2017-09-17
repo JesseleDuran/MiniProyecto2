@@ -59,6 +59,11 @@ public class Compuesto {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Compuesto{" + "componente=" + componente + ", dispositivo=" + dispositivo + '}';
+    }
     
     
 }

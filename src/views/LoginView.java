@@ -18,7 +18,7 @@ public class LoginView extends javax.swing.JFrame {
      * Creates new form LoginView
      */
     public LoginView() {
-        super("Gestión de Cursos");
+        super("Inventario");
         initComponents();
         initButtons();
         restringirTeclas();
@@ -150,4 +150,18 @@ public class LoginView extends javax.swing.JFrame {
         ciField.addKeyListener(eventosDeTecla);
     }
 
+    public void setTitle(String title)
+    {
+        jLabel3.setText(title);
+    }
+    
+    public void setButtonTitle(String title)
+    {
+        ingresarButton.setText(title);
+    }
+
+    public void cleanFields() {
+        passwordField.setText("");
+        ciField.setText("");
+    }
 }
