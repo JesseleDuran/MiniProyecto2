@@ -15,7 +15,7 @@ import models.Departamento;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class AuthorizationView extends javax.swing.JFrame {
 

@@ -9,7 +9,7 @@ import models.Departamento;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class DepartamentoDAO extends AdapterDB4O<Departamento>
 {

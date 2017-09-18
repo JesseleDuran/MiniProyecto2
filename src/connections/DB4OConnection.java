@@ -11,7 +11,7 @@ import com.db4o.ObjectContainer;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class DB4OConnection {
     

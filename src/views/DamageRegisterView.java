@@ -16,7 +16,7 @@ import models.Dispositivo;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class DamageRegisterView extends javax.swing.JFrame {
     

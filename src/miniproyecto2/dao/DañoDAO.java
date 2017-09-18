@@ -9,7 +9,7 @@ import models.Daño;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class DañoDAO extends AdapterDB4O<Daño>
 {

@@ -19,7 +19,7 @@ import models.Transaccion;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  * @param <T>
  */
 public abstract class AdapterDB4O<T> 

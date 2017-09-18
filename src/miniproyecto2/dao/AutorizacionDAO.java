@@ -9,7 +9,7 @@ import models.Autorizacion;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class AutorizacionDAO extends AdapterDB4O<Autorizacion>
 {

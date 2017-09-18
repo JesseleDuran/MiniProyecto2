@@ -9,7 +9,7 @@ import models.Transaccion;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class TransaccionDAO extends AdapterDB4O<Transaccion>
 {

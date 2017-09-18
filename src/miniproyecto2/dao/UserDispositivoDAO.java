@@ -9,7 +9,7 @@ import models.UserDispositivo;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class UserDispositivoDAO extends AdapterDB4O<UserDispositivo>
 {

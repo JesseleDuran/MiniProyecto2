@@ -9,7 +9,7 @@ import models.Compuesto;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class CompuestoDAO extends AdapterDB4O<Compuesto>
 {

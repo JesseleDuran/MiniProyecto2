@@ -14,7 +14,7 @@ import models.User;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class CompoundDeviceView extends javax.swing.JFrame {
 
@@ -135,13 +135,19 @@ public class CompoundDeviceView extends javax.swing.JFrame {
     public void cargarDispositivos(DB4OConnection db)
     {
         dispositivo.removeAllItems();
+        componente.removeAllItems();
         db.open();
         
-        dispositivos = DispositivoDAO.getInstance().getAll(db);
-        componentes = DispositivoDAO.getInstance().getAll(db);
+        dispositivos = DispositivoDAO.getInstance().queryByProperty(db,"componente",false);
+        componentes = DispositivoDAO.getInstance().queryByProperty(db,"componente",true);
         db.close();
         for (Dispositivo d: dispositivos) {
             dispositivo.addItem(d.getNombre());
+           
+        }
+        
+        for (Dispositivo d: componentes) 
+        {
             componente.addItem(d.getNombre());
         }
     }

@@ -7,7 +7,7 @@ package models;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class AppDispositivo 
 {

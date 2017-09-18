@@ -9,7 +9,7 @@ import ca.odell.glazedlists.swing.EventTableModel;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class TableView extends javax.swing.JFrame {
 

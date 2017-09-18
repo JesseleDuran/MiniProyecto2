@@ -17,7 +17,7 @@ import models.Dispositivo;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class AppDeviceView extends JFrame {
 
@@ -131,7 +131,7 @@ public class AppDeviceView extends JFrame {
     }//GEN-LAST:event_registrarButtonActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
     
@@ -140,7 +140,7 @@ public class AppDeviceView extends JFrame {
         dispositivo.removeAllItems();
         db.open();
         
-        dispositivos = DispositivoDAO.getInstance().getAll(db);
+        dispositivos = DispositivoDAO.getInstance().queryByProperty(db,"componente",false);
         db.close();
         for (Dispositivo d: dispositivos) {
             dispositivo.addItem(d.getNombre());

@@ -171,5 +171,12 @@ public class AppRegisterView extends javax.swing.JFrame {
         marcaAppField.setText(aplicacion.getMarca());
         versionField.setText(aplicacion.getVersion());
     }
+    
+    public void cleanFields()
+    {
+        nameAppField.setText("");
+        marcaAppField.setText("");
+        versionField.setText("");
+    }
 
 }

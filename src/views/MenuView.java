@@ -11,7 +11,6 @@ import ca.odell.glazedlists.GlazedLists;
 import ca.odell.glazedlists.gui.TableFormat;
 import ca.odell.glazedlists.swing.EventTableModel;
 import connections.DB4OConnection;
-import controlador.ReportesController;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -93,7 +92,7 @@ public class MenuView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(dispositivosTable);
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        jLabel3.setText("Dispositivos");
+        jLabel3.setText("Dispositivos y Componentes");
 
         dañosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -224,13 +223,11 @@ public class MenuView extends javax.swing.JFrame {
     private void addEdit()
     {
 
-
-
     }
 
     public void actualizarDispositivos(DB4OConnection db) {
-     String [] properties = new String[] {"id", "nombre", "marca","descripcion","cantidad"};
-     String [] columns = new String[] {"ID","Nombre","Marca","Descripcion","Cantidad"};
+     String [] properties = new String[] {"id", "nombre", "marca","descripcion","cantidad","componente"};
+     String [] columns = new String[] {"ID","Nombre","Marca","Descripcion","Cantidad","Componente"};
      EventList list = new BasicEventList();
      db.open();
      list.addAll(DispositivoDAO.getInstance().getAll(db));

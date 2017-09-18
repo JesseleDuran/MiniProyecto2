@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class Compuesto {
     String componente;

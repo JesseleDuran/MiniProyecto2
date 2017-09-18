@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class Encrypter {
     public static String encrypt(String target)

@@ -78,7 +78,7 @@ public class Control implements ActionListener {
     AuthorizationView authorizationView = new AuthorizationView();
     CompoundDeviceView compounView = new CompoundDeviceView();
     DeviceUserView deviceUserView = new DeviceUserView();
-    //TableView tableView = new TableView();
+    
 
     Admin adm;
     AplicacionDAO appDao = AplicacionDAO.getInstance();
@@ -185,6 +185,7 @@ public class Control implements ActionListener {
                 this.ventana_login.setTitle("Inicio de Sesion");
                 break;
             case Ventanas.Registrar.app:
+                this.app_register.cleanFields();
                 this.app_register.setVisible(true);
                 this.app_register.registrarAppButton.setText("Registrar");
                 this.app_register.registrarAppButton.setActionCommand("RegistrarApp");
@@ -969,8 +970,8 @@ public class Control implements ActionListener {
           break;
           case Ventanas.Ver.device:
             c = Dispositivo.class;
-            properties = new String[] {"id", "nombre", "marca","descripcion","cantidad"};
-            columns = new String[] {"ID","Nombre","Marca","Descripcion","Cantidad"};
+            properties = new String[] {"id", "nombre", "marca","descripcion","cantidad", "componente"};
+            columns = new String[] {"ID","Nombre","Marca","Descripcion","Cantidad","Componente"};
           break;
           case Ventanas.Ver.empleado:
             c = User.class;
@@ -1018,8 +1019,8 @@ public class Control implements ActionListener {
         db.open();
         list.addAll(AdapterDB4O.queryByClass(db, (Class)c));
         db.close();
-        TableFormat personTableFormat = GlazedLists.tableFormat((Class)c,properties, columns);
-        EventTableModel tableModel = new EventTableModel(list, personTableFormat);
+        TableFormat tableFormat = GlazedLists.tableFormat((Class)c,properties, columns);
+        EventTableModel tableModel = new EventTableModel(list, tableFormat);
         final TableView tableView = new TableView();
         final Object cl = c;
         tableView.editar.addActionListener(new ActionListener() {
@@ -1070,7 +1071,7 @@ public class Control implements ActionListener {
     
     private boolean eliminar(Object o, Object clazz)
     {
-        int reply = JOptionPane.showConfirmDialog(null, "¿estas Seguro?", "Eliminar", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "¿Estas Seguro?", "Eliminar", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) 
         {
           AdapterDB4O.deleteByClass(db, (Class)clazz, o);

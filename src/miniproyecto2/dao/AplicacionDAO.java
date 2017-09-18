@@ -9,7 +9,7 @@ import models.Aplicacion;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class AplicacionDAO extends AdapterDB4O<Aplicacion>
 {

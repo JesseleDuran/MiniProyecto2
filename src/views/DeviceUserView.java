@@ -14,7 +14,7 @@ import models.User;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class DeviceUserView extends javax.swing.JFrame {
 
@@ -127,7 +127,7 @@ public class DeviceUserView extends javax.swing.JFrame {
     }//GEN-LAST:event_registrarButtonActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_cancelarButtonActionPerformed
 
     public void cargarDispositivos(DB4OConnection db)
@@ -135,7 +135,7 @@ public class DeviceUserView extends javax.swing.JFrame {
         dispositivo.removeAllItems();
         db.open();
         
-        dispositivos = DispositivoDAO.getInstance().getAll(db);
+        dispositivos = DispositivoDAO.getInstance().queryByProperty(db,"componente",false);
         db.close();
         for (Dispositivo d: dispositivos) {
             dispositivo.addItem(d.getNombre());

@@ -9,7 +9,7 @@ import models.Dispositivo;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class DispositivoDAO extends AdapterDB4O<Dispositivo>
 {

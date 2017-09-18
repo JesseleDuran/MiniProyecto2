@@ -10,7 +10,7 @@ import java.util.UUID;
 
 /**
  *
- * @author Slaush
+ * @author Jessele
  */
 public class Daño {
     private String id;
